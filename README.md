@@ -4,6 +4,4 @@ Implementation of the Maximilian Schwarzmüller's course: Next.js & React - The 
 
 ## Section 3: Pages & File-based Routing
 
-Routing and navigation with Next.js
-
-Link: [/routing](/routing)
+Routing and navigation with Next.js. Folder: [/routing](/routing)
