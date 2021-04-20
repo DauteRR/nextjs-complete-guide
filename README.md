@@ -15,3 +15,13 @@ Project images:
 - [coding-event.jpg](/routing-demo-project/public/images/coding-event.jpg): Photo by <a href="https://unsplash.com/@fedotov_vs?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Vladimir Fedotov</a> on <a href="https://unsplash.com/s/photos/coding?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 - [introvert-event.jpg](/routing-demo-project/public/images/introvert-event.jpg): Photo by <a href="https://unsplash.com/@fedotov_vs?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Vladimir Fedotov</a> on <a href="https://unsplash.com/s/photos/introvert?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 - [extrovert-event.jpg](/routing-demo-project/public/images/extrovert-event.jpg): Photo by <a href="https://unsplash.com/@priscilladupreez?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Priscilla Du Preez</a> on <a href="https://unsplash.com/s/photos/friends?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+
+## Section 5: Page Pre-Rendering & Data Fetching
+
+This section covers the next topics:
+
+- Explanation of how Next.js blends Server-side and Client-side code
+- What is "Data Fetching"
+- Static vs Server-side page generation
+
+Folder: [/pre-rendering](/pre-rendering)
