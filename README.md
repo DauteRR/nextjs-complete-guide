@@ -24,4 +24,4 @@ This section covers the next topics:
 - What is "Data Fetching"
 - Static vs Server-side page generation
 
-Folder: [/pre-rendering](/pre-rendering)
+Folder: [/pre-rendering](/pre-rendering). The products data was randomly generated with [mockaroo](https://www.mockaroo.com/)

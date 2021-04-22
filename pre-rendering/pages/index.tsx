@@ -1,11 +1,13 @@
 import { GetStaticProps } from 'next';
+import Link from 'next/link';
 import React from 'react';
-import fs from 'fs/promises';
-import path from 'path';
+import { getProducts } from '../utils/get-products';
+import { removeDuplicatesAndSort } from '../utils/remove-duplicates-and-sort';
 
 export interface Product {
 	id: string;
 	title: string;
+	description: string;
 }
 
 export interface HomePageProps {
@@ -13,24 +15,31 @@ export interface HomePageProps {
 }
 
 export const HomePage: React.FC<HomePageProps> = ({ products }) => {
+	const uniqueProducts = removeDuplicatesAndSort<Product>(products, 'title');
+
 	return (
 		<ul>
-			{products.map(product => (
-				<li key={product.id}>{product.title}</li>
+			{uniqueProducts.map(product => (
+				<li key={product.id}>
+					<Link href={`/${product.id}`}>{product.title}</Link>
+				</li>
 			))}
 		</ul>
 	);
 };
 
 export const getStaticProps: GetStaticProps<HomePageProps> = async context => {
-	const filePath = path.join(process.cwd(), 'data', 'dummy-backend.json');
+	const products = await getProducts();
 
-	const jsonData = await fs.readFile(filePath);
-	const data: { products: Product[] } = JSON.parse(jsonData.toString());
+	if (products.length === 0) {
+		return {
+			notFound: true,
+		};
+	}
 
 	return {
 		props: {
-			products: data.products,
+			products,
 		},
 	};
 };
