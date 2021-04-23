@@ -2,11 +2,11 @@ import { NextPage } from 'next';
 import { useRouter } from 'next/dist/client/router';
 import EventList from '../../components/events/event-list';
 import EventsSearch from '../../components/events/events-search';
-import { getAllEvents } from '../../data/events';
 
 const EventsPage: NextPage = () => {
 	const router = useRouter();
-	const events = getAllEvents();
+	// TODO
+	const events = [];
 
 	const findEventsHandler = (year: string, month: string) => {
 		const fullPath = `/events/${year}/${month}`;

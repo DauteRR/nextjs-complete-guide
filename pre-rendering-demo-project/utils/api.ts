@@ -13,3 +13,8 @@ export async function getFeaturedEvents(): Promise<EventDetails[]> {
 	const allEvents = await getAllEvents();
 	return allEvents.filter(event => event.isFeatured);
 }
+
+export async function getEventById(id: string): Promise<EventDetails | undefined> {
+	const allEvents = await getAllEvents();
+	return allEvents.find(event => event.id === id);
+}

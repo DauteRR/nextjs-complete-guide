@@ -33,10 +33,6 @@ const EVENTS: EventDetails[] = [
 	},
 ];
 
-export function getAllEvents(): EventDetails[] {
-	return EVENTS;
-}
-
 export function getFilteredEvents(dateFilter: { year: number; month: number }): EventDetails[] {
 	const { year, month } = dateFilter;
 
@@ -46,8 +42,4 @@ export function getFilteredEvents(dateFilter: { year: number; month: number }): 
 	});
 
 	return filteredEvents;
-}
-
-export function getEventById(id: string): EventDetails | undefined {
-	return EVENTS.find(event => event.id === id);
 }
