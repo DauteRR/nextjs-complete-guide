@@ -33,10 +33,6 @@ const EVENTS: EventDetails[] = [
 	},
 ];
 
-export function getFeaturedEvents(): EventDetails[] {
-	return EVENTS.filter(event => event.isFeatured);
-}
-
 export function getAllEvents(): EventDetails[] {
 	return EVENTS;
 }
