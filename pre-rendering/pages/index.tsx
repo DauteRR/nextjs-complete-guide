@@ -21,7 +21,7 @@ export const HomePage: React.FC<HomePageProps> = ({ products }) => {
 		<ul>
 			{uniqueProducts.map(product => (
 				<li key={product.id}>
-					<Link href={`/${product.id}`}>{product.title}</Link>
+					<Link href={`/products/${product.id}`}>{product.title}</Link>
 				</li>
 			))}
 		</ul>

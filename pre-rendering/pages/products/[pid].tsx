@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import React from 'react';
-import { Product } from '.';
-import { getProducts } from '../utils/get-products';
+import { Product } from '..';
+import { getProducts } from '../../utils/get-products';
 
 export interface ProductDetailsPageParsedUrlQuery {
 	[key: string]: string | string[];
