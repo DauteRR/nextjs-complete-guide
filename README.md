@@ -36,6 +36,16 @@ This section covers the next topics:
 
 Folder: [/optimization](/optimization).
 
+## Section 8: Adding Backend Code with API Routes (Fullstack React)
+
+This section covers the next topics:
+
+- What are API Routes?
+- Adding & Using API Routes
+- Working with Requests & Responses
+
+Folder: [/api-routes](/api-routes)
+
 ## Images and data
 
 - [coding-event.jpg](/routing-demo-project/public/images/coding-event.jpg): Photo by <a href="https://unsplash.com/@fedotov_vs?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Vladimir Fedotov</a> on <a href="https://unsplash.com/s/photos/coding?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
