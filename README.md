@@ -26,7 +26,17 @@ Page Pre-Rendering & Data Fetching applied to the project developed during Secti
 
 Folder: [/pre-rendering-demo-project](/pre-rendering-demo-project)
 
-## Images and data:
+## Section 7: Optimizing NextJS Apps
+
+This section covers the next topics:
+
+- Adding Meta and <head> tags
+- Re-using components, logic and configuration
+- Optimizing images
+
+Folder: [/optimization](/optimization).
+
+## Images and data
 
 - [coding-event.jpg](/routing-demo-project/public/images/coding-event.jpg): Photo by <a href="https://unsplash.com/@fedotov_vs?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Vladimir Fedotov</a> on <a href="https://unsplash.com/s/photos/coding?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 - [introvert-event.jpg](/routing-demo-project/public/images/introvert-event.jpg): Photo by <a href="https://unsplash.com/@fedotov_vs?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Vladimir Fedotov</a> on <a href="https://unsplash.com/s/photos/introvert?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
