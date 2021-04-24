@@ -1,6 +1,7 @@
 import { GetServerSideProps, NextPage } from 'next';
 import { EventList } from '../../components/events/event-list';
 import ResultsTitle from '../../components/events/results-title';
+import Head from 'next/head';
 import Button from '../../components/ui/button';
 import ErrorAlert from '../../components/ui/error-alert';
 import { EventDetails } from '../../types';
@@ -24,9 +25,17 @@ const FilteredEventsPage: NextPage<FilteredEventsPageProps> = ({
 	year,
 	month,
 }) => {
+	const pageHeadData = (
+		<Head>
+			<title>{`${month}/${year} events`}</title>
+			<meta name="description" content={`All events for ${month}/${year}`} />
+		</Head>
+	);
+
 	if (invalidFilter) {
 		return (
 			<>
+				{pageHeadData}
 				<ErrorAlert>
 					<p>Invalid filter. Please adjust your values</p>
 				</ErrorAlert>
@@ -40,6 +49,7 @@ const FilteredEventsPage: NextPage<FilteredEventsPageProps> = ({
 	if (filteredEvents.length === 0) {
 		return (
 			<>
+				{pageHeadData}
 				<ErrorAlert>
 					<p>No events found for the chosen filter!</p>
 				</ErrorAlert>
@@ -54,6 +64,7 @@ const FilteredEventsPage: NextPage<FilteredEventsPageProps> = ({
 
 	return (
 		<>
+			{pageHeadData}
 			<ResultsTitle date={date} />
 			<EventList items={filteredEvents} />
 		</>

@@ -1,5 +1,6 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import React from 'react';
+import Head from 'next/head';
 import { EventContent } from '../../components/event-detail/event-content';
 import EventLogistics from '../../components/event-detail/event-logistics';
 import EventSummary from '../../components/event-detail/event-summary';
@@ -18,9 +19,17 @@ export interface EventDetailPageProps {
 }
 
 const EventDetailPage: NextPage<EventDetailPageProps> = ({ eventDetails }) => {
+	const pageHeadData = (
+		<Head>
+			<title>{eventDetails?.title ?? 'Event not found'}</title>
+			<meta name="description" content={eventDetails?.description ?? 'Event not found'} />
+		</Head>
+	);
+
 	if (!eventDetails) {
 		return (
 			<>
+				{pageHeadData}
 				<ErrorAlert>
 					<p>No event found!</p>
 				</ErrorAlert>
@@ -33,6 +42,7 @@ const EventDetailPage: NextPage<EventDetailPageProps> = ({ eventDetails }) => {
 
 	return (
 		<>
+			{pageHeadData}
 			<EventSummary title={eventDetails.title} />
 			<EventLogistics
 				address={eventDetails.location}
