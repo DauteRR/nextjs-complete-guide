@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { buildFeedbackPath, extractData, Feedback } from './feedback';
+import { buildFeedbackPath, extractData, Feedback } from '.';
 
 interface Response {
 	feedback: Feedback;

@@ -10,7 +10,7 @@ const FeedbackPage: NextPage<FeedbackPageProps> = ({ feedbackItems }) => {
 	const [feedbackData, setFeedbackData] = useState<Feedback>();
 
 	function loadFeedbackHandler(timestamp: number) {
-		fetch(`/api/${timestamp}`)
+		fetch(`/api/feedback/${timestamp}`)
 			.then(response => response.json())
 			.then((data: { feedback: Feedback }) => setFeedbackData(data.feedback));
 	}
