@@ -1,8 +1,1 @@
-[
-	{
-		"timestamp": 1619282993807,
-		"email": "test@test.test",
-		"feedback": "Testing feedback api route"
-	},
-	{ "timestamp": 1619283039135, "email": "test@test.test", "feedback": "Another test!" }
-]
+[{"timestamp":1619282993807,"email":"test1@test.test","feedback":"Testing feedback api route"},{"timestamp":1619283039135,"email":"test2@test.test","feedback":"Another test!"},{"timestamp":1619284225797,"email":"test3@test.test","feedback":"Comment"},{"timestamp":1619284944263,"email":"test4@test.test","feedback":"Foo"},{"timestamp":1619284972741,"email":"test5@test.test","feedback":"Bar"}]

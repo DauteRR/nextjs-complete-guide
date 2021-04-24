@@ -7,18 +7,35 @@ interface RequestBody {
 	feedback: string;
 }
 
-interface Feedback {
+export interface Feedback {
 	timestamp: number;
 	email: string;
 	feedback: string;
 }
 
-interface Response {
+interface PostResponse {
 	message: string;
 	feedback: Feedback;
 }
 
-function handler(req: NextApiRequest, res: NextApiResponse<Response>) {
+export interface GetResponse {
+	feedback: Feedback[];
+}
+
+export function buildFeedbackPath(): string {
+	return path.join(process.cwd(), 'data', 'feedback.json');
+}
+
+export function extractData(filePath: string): Feedback[] {
+	const fileData = fs.readFileSync(filePath);
+	return JSON.parse(fileData.toString()) as Feedback[];
+}
+
+function saveData(filePath: string, data: Feedback[]): void {
+	fs.writeFileSync(filePath, JSON.stringify(data));
+}
+
+function handler(req: NextApiRequest, res: NextApiResponse<PostResponse | GetResponse>) {
 	if (req.method === 'POST') {
 		const { email, feedback } = req.body as RequestBody;
 
@@ -28,11 +45,11 @@ function handler(req: NextApiRequest, res: NextApiResponse<Response>) {
 			feedback,
 		};
 
-		const filePath = path.join(process.cwd(), 'data', 'feedback.json');
-		const fileData = fs.readFileSync(filePath);
-		const data: Feedback[] = JSON.parse(fileData.toString());
+		const filePath = buildFeedbackPath();
+		const data = extractData(filePath);
 		data.push(newFeedback);
-		fs.writeFileSync(filePath, JSON.stringify(data));
+		saveData(filePath, data);
+
 		res.status(201).json({
 			message: 'Sucess',
 			feedback: newFeedback,
@@ -40,7 +57,15 @@ function handler(req: NextApiRequest, res: NextApiResponse<Response>) {
 		return;
 	}
 
-	res.setHeader('Allow', ['POST']);
+	if (req.method === 'GET') {
+		const filePath = buildFeedbackPath();
+		const data = extractData(filePath);
+
+		res.status(200).json({ feedback: data });
+		return;
+	}
+
+	res.setHeader('Allow', ['POST', 'GET']);
 	res.status(405).end(`Method ${req.method} Not Allowed`);
 }
 
