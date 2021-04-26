@@ -46,6 +46,10 @@ This section covers the next topics:
 
 Folder: [/api-routes](/api-routes)
 
+## Section 9: Project Time - API Routes
+
+API Routes applied to the project developed during Section 7. Folder: [/api-routes-demo-project](/api-routes-demo-project)
+
 ## Images and data
 
 - [coding-event.jpg](/routing-demo-project/public/images/coding-event.jpg): Photo by <a href="https://unsplash.com/@fedotov_vs?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Vladimir Fedotov</a> on <a href="https://unsplash.com/s/photos/coding?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
