@@ -8,6 +8,7 @@ import Button from '../../components/ui/button';
 import ErrorAlert from '../../components/ui/error-alert';
 import { EventDetails } from '../../types';
 import { getEventById, getFeaturedEvents } from '../../utils/api';
+import Comments from '../../components/input/comments';
 
 export interface EventDetailPageUrlParams {
 	[key: string]: string | string[];
@@ -53,6 +54,7 @@ const EventDetailPage: NextPage<EventDetailPageProps> = ({ eventDetails }) => {
 			<EventContent>
 				<p>{eventDetails.description}</p>
 			</EventContent>
+			<Comments eventId={eventDetails.id} />
 		</>
 	);
 };
