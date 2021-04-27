@@ -1,25 +1,23 @@
 import classes from './comment-list.module.css';
 
 import React from 'react';
+import { EventComment } from '../../pages/api/comments/[eventId]';
 
-export interface CommentListProps {}
+export interface CommentListProps {
+	items: EventComment[];
+}
 
-export const CommentList: React.FC<CommentListProps> = ({}) => {
+export const CommentList: React.FC<CommentListProps> = ({ items }) => {
 	return (
 		<ul className={classes.comments}>
-			{/* Render list of comments - fetched from API */}
-			<li>
-				<p>My comment is amazing!</p>
-				<div>
-					By <address>Maximilian</address>
-				</div>
-			</li>
-			<li>
-				<p>My comment is amazing!</p>
-				<div>
-					By <address>Maximilian</address>
-				</div>
-			</li>
+			{items.map((item, index) => (
+				<li key={index}>
+					<p>{item.content}</p>
+					<div>
+						By <address>{item.name}</address>
+					</div>
+				</li>
+			))}
 		</ul>
 	);
 };

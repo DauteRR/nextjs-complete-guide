@@ -2,9 +2,10 @@ import { useRef, useState } from 'react';
 import classes from './new-comment.module.css';
 
 import React from 'react';
+import { CommentInput } from '../../pages/api/comments/[eventId]';
 
 export interface NewCommentProps {
-	onAddComment(params: { email: string; name: string; text: string }): void;
+	onAddComment(params: CommentInput): void;
 }
 
 export const NewComment: React.FC<NewCommentProps> = ({ onAddComment }) => {
@@ -37,12 +38,12 @@ export const NewComment: React.FC<NewCommentProps> = ({ onAddComment }) => {
 		onAddComment({
 			email: enteredEmail,
 			name: enteredName,
-			text: enteredComment,
+			content: enteredComment,
 		});
 	}
 
 	return (
-		<form className={classes.form}>
+		<form className={classes.form} onSubmit={sendCommentHandler}>
 			<div className={classes.row}>
 				<div className={classes.control}>
 					<label htmlFor="email">Your email</label>
