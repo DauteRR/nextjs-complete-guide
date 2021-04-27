@@ -15,14 +15,18 @@ export interface CommentsProps {
 export const Comments: React.FC<CommentsProps> = ({ eventId }) => {
 	const [showComments, setShowComments] = useState<boolean>(false);
 	const [comments, setComments] = useState<EventComment[]>([]);
+	const [refetch, setRefetch] = useState<boolean>(false);
 
 	useEffect(() => {
 		if (showComments) {
 			fetch(`/api/comments/${eventId}`)
 				.then(response => response.json())
-				.then((data: GetCommentsResponse) => setComments(data.comments));
+				.then((data: GetCommentsResponse) => {
+					setComments(data.comments);
+					setRefetch(false);
+				});
 		}
-	}, [showComments]);
+	}, [showComments, refetch]);
 
 	function toggleCommentsHandler() {
 		setShowComments(prevStatus => !prevStatus);
@@ -37,7 +41,7 @@ export const Comments: React.FC<CommentsProps> = ({ eventId }) => {
 			},
 		})
 			.then(response => response.json())
-			.then(console.log);
+			.then(() => setRefetch(true));
 	}
 
 	return (

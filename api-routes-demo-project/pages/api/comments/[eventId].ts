@@ -1,4 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { getComments, getEventComments } from '../../../data/get-comments';
+import { saveComment } from '../../../data/save-comment';
 
 export interface CommentInput {
 	email: string;
@@ -20,13 +22,15 @@ export interface GetCommentsResponse {
 	comments: EventComment[];
 }
 
-function handler(
+async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse<GetCommentsResponse | CreateCommentResponse>
 ) {
 	const { eventId } = req.query as { eventId: string };
 	if (req.method === 'GET') {
-		res.status(200).json({ comments: [] });
+		const comments = (await getEventComments(eventId)) ?? [];
+
+		res.status(200).json({ comments });
 		return;
 	}
 
@@ -44,7 +48,8 @@ function handler(
 			email,
 			name,
 		};
-		console.log(newComment);
+
+		await saveComment(eventId, newComment);
 
 		res.status(201).json({ message: 'Success!!' });
 		return;
