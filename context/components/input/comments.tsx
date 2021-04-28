@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import {
 	CommentInput,
+	CreateCommentResponse,
 	EventComment,
 	GetCommentsResponse,
 } from '../../pages/api/comments/[eventId]';
+import { useNotification } from '../../store/notification-context';
 import CommentList from './comment-list';
 import classes from './comments.module.css';
 import NewComment from './new-comment';
@@ -15,24 +17,35 @@ export interface CommentsProps {
 export const Comments: React.FC<CommentsProps> = ({ eventId }) => {
 	const [showComments, setShowComments] = useState<boolean>(false);
 	const [comments, setComments] = useState<EventComment[]>([]);
-	const [refetch, setRefetch] = useState<boolean>(false);
+
+	const { showNotification } = useNotification();
+
+	const [isLoadingComments, setIsLoadingComments] = useState<boolean>(false);
 
 	useEffect(() => {
 		if (showComments) {
+			setIsLoadingComments(true);
+
 			fetch(`/api/comments/${eventId}`)
 				.then(response => response.json())
 				.then((data: GetCommentsResponse) => {
 					setComments(data.comments);
-					setRefetch(false);
+					setIsLoadingComments(false);
 				});
 		}
-	}, [showComments, refetch]);
+	}, [showComments]);
 
 	function toggleCommentsHandler() {
 		setShowComments(prevStatus => !prevStatus);
 	}
 
 	function addCommentHandler(commentData: CommentInput) {
+		showNotification({
+			title: 'Creating comment...',
+			message: 'Sending comment data',
+			status: 'pending',
+		});
+
 		fetch(`/api/comments/${eventId}`, {
 			method: 'POST',
 			body: JSON.stringify(commentData),
@@ -40,15 +53,33 @@ export const Comments: React.FC<CommentsProps> = ({ eventId }) => {
 				'Content-Type': 'application/json',
 			},
 		})
-			.then(response => response.json())
-			.then(() => setRefetch(true));
+			.then(response => {
+				if (response.ok) return response.json();
+
+				response.json().then((response: CreateCommentResponse) => {
+					showNotification({
+						title: 'An error occurred',
+						message: response.message ?? 'Something went wrong!',
+						status: 'error',
+					});
+				});
+			})
+			.then((response: CreateCommentResponse) => {
+				if (response.newComment) setComments([...comments, response.newComment]);
+				showNotification({
+					title: 'Success!',
+					message: 'Comment created',
+					status: 'success',
+				});
+			});
 	}
 
 	return (
 		<section className={classes.comments}>
 			<button onClick={toggleCommentsHandler}>{showComments ? 'Hide' : 'Show'} Comments</button>
 			{showComments && <NewComment onAddComment={addCommentHandler} />}
-			{showComments && <CommentList items={comments} />}
+			{showComments && !isLoadingComments && <CommentList items={comments} />}
+			{showComments && isLoadingComments && <p>Loading ...</p>}
 		</section>
 	);
 };

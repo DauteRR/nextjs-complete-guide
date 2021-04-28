@@ -26,6 +26,10 @@ export const NotificationContextProvider: React.FC = ({ children }) => {
 
 	function showNotification(notificationData: NotificationType) {
 		setNotification(notificationData);
+
+		if (notificationData.status !== 'pending') {
+			setTimeout(hideNotification, 2000);
+		}
 	}
 
 	function hideNotification() {

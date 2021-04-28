@@ -5,20 +5,22 @@ interface NewsletterSubscriptionBody {
 	email: string;
 }
 
-interface NewsletterSubscriptionResponse {
+export interface NewsletterSubscriptionResponse {
 	message: string;
 }
 
 async function handler(req: NextApiRequest, res: NextApiResponse<NewsletterSubscriptionResponse>) {
+	// Delay simulation
+	await new Promise(resolve => setTimeout(resolve, Math.random() * (3000 - 1000) + 1000));
+
 	if (req.method === 'POST') {
 		const { email } = req.body as NewsletterSubscriptionBody;
 
 		// Dummy validation
-		if (!email || !email.includes('@')) {
+		if (!email || !email.includes('@') || email === '') {
 			res.status(422).json({ message: 'Invalid email address' });
+			return;
 		}
-
-		console.log(email);
 
 		try {
 			await registerEmail(email);

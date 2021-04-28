@@ -14,8 +14,9 @@ export interface EventComment extends CommentInput {
 
 interface CreateCommentBody extends CommentInput {}
 
-interface CreateCommentResponse {
+export interface CreateCommentResponse {
 	message: string;
+	newComment?: EventComment;
 }
 
 export interface GetCommentsResponse {
@@ -26,6 +27,9 @@ async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse<GetCommentsResponse | CreateCommentResponse>
 ) {
+	// Delay simulation
+	await new Promise(resolve => setTimeout(resolve, Math.random() * (3000 - 1000) + 1000));
+
 	const { eventId } = req.query as { eventId: string };
 	if (req.method === 'GET') {
 		const comments = (await getEventComments(eventId)) ?? [];
@@ -40,6 +44,7 @@ async function handler(
 		// Dummy validation
 		if (!email.includes('@') || !name || name.trim() === '' || !content || content.trim() === '') {
 			res.status(422).json({ message: 'Invalid input' });
+			return;
 		}
 
 		const newComment: EventComment = {
@@ -49,10 +54,14 @@ async function handler(
 			name,
 		};
 
-		await saveComment(eventId, newComment);
-
-		res.status(201).json({ message: 'Success!!' });
-		return;
+		try {
+			await saveComment(eventId, newComment);
+			res.status(201).json({ message: 'Success!!', newComment });
+			return;
+		} catch (error) {
+			res.status(422).json({ message: error.message });
+			return;
+		}
 	}
 
 	res.setHeader('Allow', ['GET', 'POST']);

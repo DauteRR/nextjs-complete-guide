@@ -1,14 +1,23 @@
 import classes from './newsletter-registration.module.css';
 
 import React, { useRef } from 'react';
+import { useNotification } from '../../store/notification-context';
+import { NewsletterSubscriptionResponse } from '../../pages/api/newsletter';
 
 export interface NewsletterRegistrationProps {}
 
 export const NewsletterRegistration: React.FC<NewsletterRegistrationProps> = ({}) => {
 	const emailInputRef = useRef<HTMLInputElement>();
+	const { showNotification } = useNotification();
 
 	const registrationHandler: React.FormEventHandler<HTMLFormElement> = event => {
 		event.preventDefault();
+
+		showNotification({
+			title: 'Signing up...',
+			message: 'Registering for newsletter',
+			status: 'pending',
+		});
 
 		fetch('/api/newsletter', {
 			method: 'POST',
@@ -17,8 +26,24 @@ export const NewsletterRegistration: React.FC<NewsletterRegistrationProps> = ({}
 				'Content-Type': 'application/json',
 			},
 		})
-			.then(response => response.json())
-			.then(console.log);
+			.then(response => {
+				if (response.ok) return response.json();
+
+				response.json().then((response: NewsletterSubscriptionResponse) => {
+					showNotification({
+						title: 'An error occurred',
+						message: response.message,
+						status: 'error',
+					});
+				});
+			})
+			.then(() => {
+				showNotification({
+					title: 'Success!',
+					message: 'Successfully registered for newsletter',
+					status: 'success',
+				});
+			});
 	};
 
 	return (
