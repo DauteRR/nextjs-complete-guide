@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { registerEmail } from '../../data/register-email';
 
 interface NewsletterSubscriptionBody {
 	email: string;
@@ -8,7 +9,7 @@ interface NewsletterSubscriptionResponse {
 	message: string;
 }
 
-function handler(req: NextApiRequest, res: NextApiResponse<NewsletterSubscriptionResponse>) {
+async function handler(req: NextApiRequest, res: NextApiResponse<NewsletterSubscriptionResponse>) {
 	if (req.method === 'POST') {
 		const { email } = req.body as NewsletterSubscriptionBody;
 
@@ -19,8 +20,14 @@ function handler(req: NextApiRequest, res: NextApiResponse<NewsletterSubscriptio
 
 		console.log(email);
 
-		res.status(201).json({ message: 'Success!!' });
-		return;
+		try {
+			await registerEmail(email);
+			res.status(201).json({ message: 'Success!!' });
+			return;
+		} catch (error) {
+			res.status(422).json({ message: error.message });
+			return;
+		}
 	}
 
 	res.setHeader('Allow', ['POST']);
