@@ -19,8 +19,6 @@ export const MainNavigation: React.FC<MainNavigationProps> = ({}) => {
 					<li>
 						<Link href="/posts">Posts</Link>
 					</li>
-				</ul>
-				<ul>
 					<li>
 						<Link href="/contact">Contact</Link>
 					</li>

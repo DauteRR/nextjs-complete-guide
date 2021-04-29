@@ -6,7 +6,7 @@ import { Post } from '../types';
 
 export interface HomePageProps {}
 
-const DUMMY_POSTS: Post[] = [
+export const DUMMY_POSTS: Post[] = [
 	{
 		date: '2021-01-10',
 		description:
