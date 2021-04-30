@@ -67,5 +67,6 @@ Folder: [/blog](/blog)
 - [extrovert-event.jpg](/routing-demo-project/public/images/extrovert-event.jpg): Photo by <a href="https://unsplash.com/@priscilladupreez?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Priscilla Du Preez</a> on <a href="https://unsplash.com/s/photos/friends?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 - [dog.jpg](/blog/public/images/site/dog.jpg): Photo by <a href="https://unsplash.com/@grbchh?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Oleksandr Horbach</a> on <a href="https://unsplash.com/s/photos/doge?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 - [getting-started-with-nextjs.jpg](/blog/public/images/posts/getting-started-with-nextjs/getting-started-with-nextjs.jpg): Photo by <a href="https://unsplash.com/@flowforfrank?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Ferenc Almasi</a> on <a href="https://unsplash.com/s/photos/react?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+- [nextjs-file-based-routing.png](/blog/public/images/posts/getting-started-with-nextjs/nextjs-file-based-routing.png): Photo provided by course instructor
 
 - [Products data](/pre-rendering/data/dummy-backend.json): Randomly generated with [mockaroo](https://www.mockaroo.com/)
