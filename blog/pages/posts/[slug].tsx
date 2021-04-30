@@ -1,5 +1,6 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import React from 'react';
+import Head from 'next/head';
 import PostContent from '../../components/posts/post-detail/post-content';
 import { Post } from '../../types';
 import { getPostData, getPostsFiles } from '../../utils/posts';
@@ -14,7 +15,15 @@ export interface PostPageProps {
 }
 
 const PostPage: NextPage<PostPageProps> = ({ post }) => {
-	return <PostContent {...post} />;
+	return (
+		<>
+			<Head>
+				<title>{post.title}</title>
+				<meta name="description" content={post.description} />
+			</Head>
+			<PostContent {...post} />
+		</>
+	);
 };
 
 export const getStaticProps: GetStaticProps<PostPageProps, PostPageParsedUrlQuery> = async ({
