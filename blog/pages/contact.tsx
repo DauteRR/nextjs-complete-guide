@@ -1,10 +1,11 @@
 import { NextPage } from 'next';
 import React from 'react';
+import ContactForm from '../components/contact/contact-form';
 
 export interface ContactPageProps {}
 
 const ContactPage: NextPage<ContactPageProps> = ({}) => {
-	return <h1>ContactPage</h1>;
+	return <ContactForm />;
 };
 
 export default ContactPage;

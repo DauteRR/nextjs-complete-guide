@@ -15,6 +15,7 @@ function handler(req: NextApiRequest, res: NextApiResponse<NewsletterSubscriptio
 		// Dummy validation
 		if (!email || !email.includes('@')) {
 			res.status(422).json({ message: 'Invalid email address' });
+			return;
 		}
 
 		console.log(email);
