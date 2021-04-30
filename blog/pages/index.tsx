@@ -1,29 +1,31 @@
-import { NextPage } from 'next';
+import { GetStaticProps, NextPage } from 'next';
 import React from 'react';
 import { FeaturedPosts } from '../components/home-page/featured-posts';
 import { Hero } from '../components/home-page/hero';
 import { Post } from '../types';
+import { getFeaturedPosts } from '../utils/posts';
 
-export interface HomePageProps {}
+export interface HomePageProps {
+	featuredPosts: Post[];
+}
 
-export const DUMMY_POSTS: Post[] = [
-	{
-		date: '2021-01-10',
-		description:
-			'NextJS is the React framework for production - it makes building fullstack React apps and sites a breeze and ships with built-in SSR.',
-		slug: 'getting-started-with-nextjs',
-		image: 'getting-started-with-nextjs.jpg',
-		title: 'Getting Started with NextJS',
-	},
-];
-
-const HomePage: NextPage<HomePageProps> = ({}) => {
+const HomePage: NextPage<HomePageProps> = ({ featuredPosts }) => {
 	return (
 		<>
 			<Hero />
-			<FeaturedPosts posts={DUMMY_POSTS} />
+			<FeaturedPosts posts={featuredPosts} />
 		</>
 	);
+};
+
+export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
+	const featuredPosts = getFeaturedPosts();
+
+	return {
+		props: {
+			featuredPosts,
+		},
+	};
 };
 
 export default HomePage;

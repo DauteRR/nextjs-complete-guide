@@ -56,7 +56,7 @@ Adding app-wide state to the demo project developed during Section 9. Folder: [/
 
 ## Section 11: Complete App Example: Build a Full Blog A to Z
 
-Practical application of all the concepts and topics covered during the courese.
+Practical application of all the concepts and topics covered during the course.
 
 Folder: [/blog](/blog)
 
