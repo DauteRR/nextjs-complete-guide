@@ -1,26 +1,67 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import { SignupResponse } from '../../pages/api/auth/signup';
 import classes from './auth-form.module.css';
+
+async function createUser(email: string, password: string) {
+	const response = await fetch('/api/auth/signup', {
+		method: 'POST',
+		body: JSON.stringify({ email, password }),
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	});
+
+	const data = (await response.json()) as SignupResponse;
+
+	if (!response.ok) {
+		throw new Error(data.message || 'Something went wrong!');
+	}
+
+	return data;
+}
 
 export interface AuthFormProps {}
 
 export const AuthForm: React.FC<AuthFormProps> = ({}) => {
 	const [isLogin, setIsLogin] = useState(true);
+	const emailInputRef = useRef<HTMLInputElement>();
+	const passwordInputRef = useRef<HTMLInputElement>();
 
 	function switchAuthModeHandler() {
 		setIsLogin(prevState => !prevState);
 	}
 
+	const submitHandler: React.FormEventHandler<HTMLFormElement> = async event => {
+		event.preventDefault();
+
+		if (isLogin) {
+			// log user in
+
+			return;
+		}
+
+		const email = emailInputRef.current.value;
+		const password = passwordInputRef.current.value;
+
+		try {
+			const result = await createUser(email, password);
+			console.log(result);
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
 	return (
 		<section className={classes.auth}>
 			<h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
-			<form>
+			<form onSubmit={submitHandler}>
 				<div className={classes.control}>
 					<label htmlFor="email">Your Email</label>
-					<input type="email" id="email" required />
+					<input type="email" id="email" required ref={emailInputRef} />
 				</div>
 				<div className={classes.control}>
 					<label htmlFor="password">Your Password</label>
-					<input type="password" id="password" required />
+					<input type="password" id="password" required ref={passwordInputRef} />
 				</div>
 				<div className={classes.actions}>
 					<button>{isLogin ? 'Login' : 'Create Account'}</button>
