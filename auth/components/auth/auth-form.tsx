@@ -47,8 +47,10 @@ export const AuthForm: React.FC<AuthFormProps> = ({}) => {
 				password,
 			});
 
+			console.log(result);
+
 			if (!result.error) {
-				router.replace('/profile');
+				router.replace('/');
 			}
 
 			return;

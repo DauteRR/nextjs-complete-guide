@@ -23,10 +23,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse<SignupResponse>
 			return;
 		}
 
-		console.log('Connecting to database');
 		const client = await connectToDatabase(res);
 		if (client === undefined) {
-			console.error('Connection failed: undefined mongo client');
 			res.status(500).json({ message: 'Could not connect to database.' });
 			return;
 		}
@@ -36,14 +34,12 @@ async function handler(req: NextApiRequest, res: NextApiResponse<SignupResponse>
 		const existingUser = await db.collection('users').findOne({ email });
 
 		if (existingUser) {
-			console.log(existingUser);
 			await client.close();
 			res.status(422).json({ message: 'User already exists' });
 			return;
 		}
 
 		try {
-			console.log('Storing user');
 			const hashedPassword = await hashPassword(password);
 
 			const result = await db.collection('users').insertOne({
@@ -52,8 +48,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse<SignupResponse>
 			});
 		} catch (err) {
 			await client.close();
-			console.error('Storing message failed');
-			res.status(500).json({ message: 'Storing message failed' });
+			res.status(500).json({ message: 'User creation failed' });
 			return;
 		}
 
