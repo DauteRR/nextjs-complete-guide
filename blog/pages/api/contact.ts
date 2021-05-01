@@ -27,7 +27,7 @@ async function connectToDatabase(res: NextApiResponse<ContactResponse>): Promise
 			useUnifiedTopology: true,
 		});
 	} catch (err) {
-		console.error(err);
+		console.error('Connection failed:', err.message);
 		res.status(500).json({ message: 'Could not connect to database.' });
 	}
 
@@ -53,15 +53,22 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ContactResponse
 
 		const newMessage: Message = { id: '', email, name, content };
 
+		console.log('Connecting to database');
 		const client = await connectToDatabase(res);
-		if (client === undefined) return;
+		if (client === undefined) {
+			console.error('Connection failed: undefined mongo client');
+			res.status(500).json({ message: 'Could not connect to database.' });
+			return;
+		}
 
 		const db = client.db(process.env.MONGODB_DB_NAME);
 		try {
+			console.log('Storing message');
 			const result = await db.collection('messages').insertOne(newMessage);
 			newMessage.id = result.insertedId;
 		} catch (err) {
 			await client.close();
+			console.error('Storing message failed');
 			res.status(500).json({ message: 'Storing message failed' });
 			return;
 		}
