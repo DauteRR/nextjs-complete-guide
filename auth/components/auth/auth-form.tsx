@@ -45,8 +45,6 @@ export const AuthForm: React.FC<AuthFormProps> = ({}) => {
 				password,
 			});
 
-			console.log(result);
-
 			return;
 		}
 
