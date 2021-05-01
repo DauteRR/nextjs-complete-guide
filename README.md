@@ -62,6 +62,18 @@ Folder: [/blog](/blog)
 
 ## Section 12: Deploying NextJS Apps
 
+[Deployment](https://nextjs-complete-guide.vercel.app/)
+
+## Section 13: Adding Authentication
+
+This section covers the next topics:
+
+- How does authentication work?
+- Implementing Signup & Login
+- Controlling page access
+
+Folder: [/auth](/auth)
+
 ## Images and data
 
 - [coding-event.jpg](/routing-demo-project/public/images/coding-event.jpg): Photo by <a href="https://unsplash.com/@fedotov_vs?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Vladimir Fedotov</a> on <a href="https://unsplash.com/s/photos/coding?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
