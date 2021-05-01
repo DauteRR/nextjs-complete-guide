@@ -32,6 +32,16 @@ async function handler(req: NextApiRequest, res: NextApiResponse<SignupResponse>
 		}
 
 		const db = client.db(process.env.MONGODB_DB_NAME);
+
+		const existingUser = await db.collection('users').findOne({ email });
+
+		if (existingUser) {
+			console.log(existingUser);
+			await client.close();
+			res.status(422).json({ message: 'User already exists' });
+			return;
+		}
+
 		try {
 			console.log('Storing user');
 			const hashedPassword = await hashPassword(password);

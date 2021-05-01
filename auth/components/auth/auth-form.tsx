@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { SignupResponse } from '../../pages/api/auth/signup';
+import { signIn } from 'next-auth/client';
 import classes from './auth-form.module.css';
 
 async function createUser(email: string, password: string) {
@@ -34,14 +35,20 @@ export const AuthForm: React.FC<AuthFormProps> = ({}) => {
 	const submitHandler: React.FormEventHandler<HTMLFormElement> = async event => {
 		event.preventDefault();
 
+		const email = emailInputRef.current.value;
+		const password = passwordInputRef.current.value;
+
 		if (isLogin) {
-			// log user in
+			const result = await signIn('credentials', {
+				redirect: false,
+				email,
+				password,
+			});
+
+			console.log(result);
 
 			return;
 		}
-
-		const email = emailInputRef.current.value;
-		const password = passwordInputRef.current.value;
 
 		try {
 			const result = await createUser(email, password);

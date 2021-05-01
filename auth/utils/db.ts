@@ -1,7 +1,7 @@
 import { MongoClient } from 'mongodb';
 import { NextApiResponse } from 'next';
 
-export async function connectToDatabase(res: NextApiResponse): Promise<MongoClient> {
+export async function connectToDatabase(res?: NextApiResponse): Promise<MongoClient> {
 	let client: MongoClient;
 
 	try {
@@ -11,7 +11,7 @@ export async function connectToDatabase(res: NextApiResponse): Promise<MongoClie
 		});
 	} catch (err) {
 		console.error('Connection failed:', err.message);
-		res.status(500).json({ message: 'Could not connect to database.' });
+		if (res) res.status(500).json({ message: 'Could not connect to database.' });
 	}
 
 	return client;
