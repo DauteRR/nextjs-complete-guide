@@ -60,6 +60,8 @@ Practical application of all the concepts and topics covered during the course.
 
 Folder: [/blog](/blog)
 
+## Section 12: Deploying NextJS Apps
+
 ## Images and data
 
 - [coding-event.jpg](/routing-demo-project/public/images/coding-event.jpg): Photo by <a href="https://unsplash.com/@fedotov_vs?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Vladimir Fedotov</a> on <a href="https://unsplash.com/s/photos/coding?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
@@ -68,5 +70,6 @@ Folder: [/blog](/blog)
 - [dog.jpg](/blog/public/images/site/dog.jpg): Photo by <a href="https://unsplash.com/@grbchh?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Oleksandr Horbach</a> on <a href="https://unsplash.com/s/photos/doge?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 - [getting-started-with-nextjs.jpg](/blog/public/images/posts/getting-started-with-nextjs/getting-started-with-nextjs.jpg): Photo by <a href="https://unsplash.com/@flowforfrank?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Ferenc Almasi</a> on <a href="https://unsplash.com/s/photos/react?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 - [nextjs-file-based-routing.png](/blog/public/images/posts/getting-started-with-nextjs/nextjs-file-based-routing.png): Photo provided by course instructor
+- [github-logo.png](/blog/public/images/site/github-logo.png): Logo provided by <a href="https://github.com/logos">Github</a>
 
 - [Products data](/pre-rendering/data/dummy-backend.json): Randomly generated with [mockaroo](https://www.mockaroo.com/)
